@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>AngularJS</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+       
+      <script th:src="@{/main.js}"></script>
+      <link th:href="@{/main.css}" rel="stylesheet" />
+       
+      <head>
+   <body ng-app="CarRentalApplication" ng-controller="carRentalController">
+      <h3>
+      </h3>
+         <table border="0">
+            <tr>
+               <th>Locations</th>
+               <th>Choose any one location</th>
+            </tr>
+            <tbody ng-repeat="location in locations">
+                <tr>
+                    <td>{{location}}</td>
+                    <td><input type="radio" ng-model="$parent.selectedLocation"  name ='location' ng-value ="'{{location}}'"  /></td>
+                </tr>
+             </tbody>
+            <tr>
+               <td>From Date</td>
+               <td><input type="text" ng-model="fromDate" placeholder =" dd-mm-yyyy"/></td>
+               <td>Time</td>
+               <td><input type="text" ng-model="fromTime" placeholder =" hh:mm AM/PM"/></td>
+            </tr>
+             <tr>
+               <td>To Date</td>
+               <td><input type="text" ng-model="toDate" placeholder =" dd-mm-yyyy"/></td>
+               <td>Time</td>
+               <td><input type="text" ng-model="toTime" placeholder =" hh:mm AM/PM"/></td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <input type="submit" value="Submit" class="blue-button" ng-click ="submitRequest()"/>
+               </td>
+            </tr>
+         </table>
+      <br/> 
+      <h4>cars available at location {{selectedLocation}}</h4>
+      <table border ="1" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Car name</th>
+                <th>Category</th>
+                <th>Reserve</th>
+            </tr>
+            <tr ng-repeat="rentalCar in availableRentalCars">
+            <td>{{rentalCar.carName}}</td>
+            <td>{{rentalCar.category}}</td>
+            <td >
+            <input type="submit" value="Reserve" class="black-button" ng-click = "reserveCar(rentalCar)" /></td>
+            </tr>
+        </table>
+   </body>
+</html>
